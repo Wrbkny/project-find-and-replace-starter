@@ -10,17 +10,38 @@ const replaceAllButton = document.querySelector(".replace-all-button")
 // this array.
 const rowElements = document.querySelectorAll(".row")
 
-// When you call the function belwo, it will get and return an INNER ARRAY
+// When you call the function below, it will get and return an INNER ARRAY
 // containing the cell elements for a given row.
 // Call this function from WITHIN your row elements loop. Then you will, in turn,
 // need to loop over the resulting cell elements. But where should this whole
 // NESTED LOOP go? Think through the user's experience: when should WHAT happen? 
-function getCellElements (currentRowElement) {
+function getCellElements(currentRowElement) {
     return currentRowElement.querySelectorAll(".cell")
 }
 
 
 // YOUR CODE GOES HERE
+
+replaceAllButton.addEventListener("click", function () {
+
+    let findvalue = document.querySelector(".find-input").value
+    let replacevalue = document.querySelector(".replace-input").value
+
+    for (let index = 0; index < rowElements.length; index++) {
+        let element = rowElements[index];
+        let cellArray = getCellElements(element)
+
+        for (let cellIndex = 0; cellIndex < cellArray.length; cellIndex++) {
+
+            if (cellArray[cellIndex].innerText.includes(findvalue)) {
+                cellArray[cellIndex].innerHTML = cellArray[cellIndex].innerHTML.replace(findvalue, replacevalue)
+            }
+
+        }
+
+    }
+
+})
 
 
 // One last thing: dedicate very careful attention to using variables and
